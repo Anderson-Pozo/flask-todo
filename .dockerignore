@@ -1,0 +1,5 @@
+.git/
+venv/
+env/
+db_data/
+template.txt

@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %} Not found {% endblock %}
+
+{% block content %}
+    <div class="d-flex justify-content-center">
+        <img src="{{ url_for('static', filename='images/500_error.svg') }}" height="575px">
+    </div>
+{% endblock %}
+
+

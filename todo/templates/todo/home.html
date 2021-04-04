@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+
+{% block title %} Home {% endblock %}
+{% block extracss %}
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="row d-flex justify-content-center container">
+    <div class="col-md-8">
+        <div class="card-hover-shadow-2x mb-3 card">
+            <div class="card-header-tab card-header">
+                <div class="card-header-title font-size-lg text-capitalize font-weight-normal">
+                    <i class="fa fa-tasks"></i>&nbsp;ToDo List
+                </div>
+            </div>
+            <div class="scroll-area-sm">
+                <perfect-scrollbar class="ps-show-limits">
+                    <div style="position: static;" class="ps ps--active-y">
+                        <div class="ps-content">
+                            <ul class=" list-group list-group-flush">
+                                {% if todos %}
+                                {% for todo in todos %}
+                                <li class="list-group-item">
+                                    {% if todo['completed'] == 1 %}
+                                    <div class="todo-indicator bg-primary"></div>
+                                    {% else %}
+                                    <div class="todo-indicator bg-warning"></div>
+                                    {% endif %}
+                                    <div class="widget-content p-0">
+                                        <div class="widget-content-wrapper">
+                                            <div class="widget-content-left">
+                                                <div class="widget-heading">
+                                                    {% if todo['completed'] == 1 %}
+                                                    <strike>{{todo['description']}}</strike>
+                                                    <div class="badge badge-success ml-2">Completed</div>
+                                                    {% else %}
+                                                    {{ todo['description'] }}
+                                                    <div class="badge badge-warning ml-2">TO-DO</div>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="widget-subheading"><i>
+                                                    Created by {{ g.user['username'] }} at
+                                                    {{todo['created_at'].strftime('%d-%m-%Y') }}
+                                                    <p style="color: dodgerblue; font-weight: bold">
+                                                        {{todo['deadline'].strftime('%d-%B-%Y') }}
+                                                    </p>
+                                                </i></div>
+                                            </div>
+                                            <div class="widget-content-right">
+                                                <button onclick="open_modal_update('{{ url_for('todo.update', id=todo['id']) }}')"
+                                                        class="border-0 btn-transition btn btn-outline-success"
+                                                        data-toggle="modal"
+                                                        data-target="#update">
+                                                    <i class="fa fa-edit"></i>
+                                                </button>
+                                                <form action="{{ url_for('todo.delete', id=todo['id']) }}"
+                                                      method="post">
+                                                    <button class="border-0 btn-transition btn btn-outline-danger"
+                                                            type="submit"
+                                                            onclick="return confirm('Are you sure deleted this To-Do?')">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                {% endfor %}
+                                {% else %}
+                                <div class="d-flex justify-content-center">
+                                    <img src="{{ url_for('static', filename='images/nothing_show.svg') }}"
+                                         height="250px">
+                                </div>
+                                <h5 class="text-center">Yeah! You don`t have TO-DO`s</h5>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                </perfect-scrollbar>
+            </div>
+            <div class="d-block text-right card-footer">
+                {% if g.user %}
+                <button onclick="open_modal_creation('{{ url_for('todo.create') }}')"
+                        class="btn btn-primary"
+                        data-toggle="modal"
+                        data-target="#creation">
+                    Add To-Do
+                </button>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="creation" role="dialog"></div>
+    <div class="modal" id="update" role="dialog"></div>
+</div>
+<script>
+    var $ = jQuery.noConflict();
+
+    function open_modal_creation(url) {
+        $('#creation').load(url, function () {
+            $(this).modal('show');
+        });
+    }
+
+    function open_modal_update(url) {
+        $('#update').load(url, function () {
+            $(this).modal('show');
+        });
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %} - ToDo List</title>
+
+    <link rel="apple-touch-icon" href="{{ url_for('static', filename='images/favicon.png') }}" >
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.png') }}">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' rel="stylesheet">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    {% block extracss %}{% endblock %}
+</head>
+<body>
+<nav class="navbar navbar-expand-sm bg-light justify-content-center">
+            <a class="navbar-brand" href="{{ url_for('todo.home') }}">ToDo List</a>
+            <ul class="navbar-nav">
+            {% if g.user %}
+                <li class="nav-item">
+                    <a class="nav-link">
+                        <span class="text-info"> User: {{ g.user['username'] }}</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('auth.logout')}}">
+                        <span class="text-danger">Logout</span>
+                    </a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('auth.register')}}">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('auth.login')}}">Login</a>
+                </li>
+            {% endif %}
+        </ul>
+</nav>
+<section class="content">
+    <header>
+        {% block header %}{% endblock %}
+    </header>
+    <br>
+    <div class="row">
+        <div class="col"></div>
+        <div class="col">
+            <div class="text-center">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <ul>
+                {% for message in messages %}
+                <div class="alert alert-danger">{{ message }}</div>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% endwith %}
+            </div>
+        </div>
+        <div class="col"></div>
+    </div>
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+</section>
+</body>
+</html>

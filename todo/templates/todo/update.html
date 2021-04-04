@@ -1,0 +1,49 @@
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title">Edit To-Do</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form method="post" action="{{ url_for('todo.update', id=todo['id']) }}">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col col-md-6">
+                            <label>Deadline</label>
+                            <input class="form-control"
+                                   type="date"
+                                   name="deadline"
+                                   id="deadline"
+                                   value="{{ todo['deadline'].strftime('%Y-%m-%d') }}">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description To-Do</label>
+                    <textarea class="form-control"
+                              autofocus
+                              name="description"
+                              id="description"
+                              required
+                              rows="2">{{ request.form['description'] or todo['description'] }}</textarea>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input"
+                           type="checkbox"
+                           id="completed"
+                           name="completed"
+                           {% if todo['completed'] == 1 %} checked {% endif %}>
+                    <label class="form-check-label" for="completed">
+                        Completed
+                    </label>
+                </div>
+                <br>
+                <div class="modal-footer">
+                    <button class="btn btn-success" type="submit">Save changes</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
