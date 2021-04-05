@@ -12,24 +12,23 @@ with Docker compose
 
 ### Installing
 1. Clone the repository
-2. In root directory run the next command for up container
+2. In root directory run the command
     ```sh
     docker-compose up -d
     ```
-3. Aply migrations to recreate schema database
+3. Run the following command to recreate the database schema
     ```sh
     docker exec -it web flask init-db
     ```
-4. Verify if containers are running
+4. Check if containers are running
     ```sh
    docker ps
    ```
-5. Open navigator in port [localhost:5000](http://localhost:5000/)
+5. Open the browser in the port [localhost:5000](http://localhost:5000/)
 
 
 ## 🚀 Deployment
-You can deploy this project in Heroku in few steps with 
-the next tutorial
+You can deploy this project on Heroku
 
 ## ⚙ Built with
 
