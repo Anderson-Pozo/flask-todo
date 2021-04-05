@@ -8,10 +8,13 @@ with Docker compose
 ### Prerequisites
 
 - Docker
-- Editor code
+- Code editor
 
 ### Installing
 1. Clone the repository
+    ```sh
+   https://github.com/Anderson-Pozo/flask-todo.git
+   ```
 2. In root directory run the command
     ```sh
     docker-compose up -d
