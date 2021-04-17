@@ -1,1 +1,1 @@
-web: gunicorn todo.main
+web: gunicorn todo
