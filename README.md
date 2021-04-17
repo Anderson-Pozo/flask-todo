@@ -3,14 +3,12 @@
 This is a simple application To-Do development in Flask
 with Docker compose
 
-## 📑 Getting Started
-
-### Prerequisites
+## 📑 Prerequisites
 
 - Docker
 - Code editor
 
-### Installing
+## ⚙ Installing
 1. Clone the repository
     ```sh
    https://github.com/Anderson-Pozo/flask-todo.git
