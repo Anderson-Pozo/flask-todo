@@ -11,11 +11,8 @@ services:
     restart: always
     ports:
       - "3306:3306"
-    environment:
-      MYSQL_ROOT_PASSWORD: 1234
-      MYSQL_DATABASE: todo_flask
-      MYSQL_USER: dev
-      MYSQL_PASSWORD: 1234
+    env_file:
+      - env/mysql.env
   web:
     container_name: web
     build: .
