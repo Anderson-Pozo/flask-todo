@@ -145,4 +145,4 @@ dmypy.json
 # End of https://www.toptal.com/developers/gitignore/api/flask
 template.txt
 .idea/
-venv/*
+env/*
