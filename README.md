@@ -13,6 +13,20 @@ with Docker compose
     ```sh
    https://github.com/Anderson-Pozo/flask-todo.git
    ```
+2. Create env directory with two files, local.env and mysql.env
+    ```sh
+    # local.env
+    DB_HOST=db
+    DB_USER=dev
+    DB_PASSWORD=1234
+    DB_NAME=todo_flask
+   
+   #mysql.env
+    MYSQL_ROOT_PASSWORD=1234
+    MYSQL_DATABASE=todo_flask
+    MYSQL_USER=dev
+    MYSQL_PASSWORD=1234
+    ``` 
 2. In root directory run the command
     ```sh
     docker-compose up -d
